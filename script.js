@@ -147,11 +147,31 @@ function scoreRender(){
     scoreDiv.style.display = "block";
     
     // calculate the amount of question percent answered by the user
-    const scorePerCent = Math.round(100 * score/questions.length);
-    var recScore = localStorage.setItem("scorePerCent", JSON.stringify(scorePerCent));
-    
+     
     // choose the image based on the scorePerCent
   
-    scoreDiv.innerHTML += "<p>"+ scorePerCent +"%</p>";
+  
+    document.getElementById("initial").style.display="block";
+    
 };
 
+document.getElementById("submit").addEventListener("click", function(){
+    const scorePerCent = Math.round(100 * score/questions.length);
+    var playerScore ={
+        initial:document.getElementById("textbox").value,
+        score:scorePerCent
+    }
+    var recScore = localStorage.setItem("scorePerCent", JSON.stringify(playerScore));
+    var getplayerInfo =  JSON.parse( localStorage.getItem("scorePerCent"))
+    scoreDiv.innerHTML += "<p>"+  getplayerInfo.initial+" - " + getplayerInfo.score +"%</p>";
+    document.getElementById("initial").style.display="none";
+    document.getElementById("viewHighscore").style.display="block";
+})
+
+document.getElementById("goBack").addEventListener("click", function(){
+    location.reload()
+})
+document.getElementById("clear").addEventListener("click", function(){
+    scoreDiv.innerHTML=""
+    localStorage.clear()
+})
