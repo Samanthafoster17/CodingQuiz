@@ -81,20 +81,7 @@ h1{
 #counter{
     font-size: 3em;
 }
-/* #btimeGauge{
-    width : 150px;
-    height : 10px;
-    border-radius: 10px;
-    background-color: white;
-    margin-left : 25px;
-}
-#timeGauge{
-    height : 10px;
-    border-radius: 10px;
-    background-color:white;
-    margin-top : -10px;
-    margin-left : 25px;
-} */
+
 #progress{
     width : 500px;
     position: absolute;

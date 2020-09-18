@@ -1,4 +1,4 @@
- //assign quiz questions and answers
+//assign quiz questions and answers
 const start = document.getElementById("start");
 const quiz = document.getElementById("quiz");
 const question = document.getElementById("question");
@@ -13,36 +13,36 @@ const highscore = document.getElementById("highscore");
 const scoresBtn = document.getElementById("scoresBtn");
 
 var questions = [{
-	question: "1. How do you write 'Hello World' in an alert box?",
-	choiceA: "msgBox('Hello World');",
-	choiceB: "alertBox('Hello World');",
-	choiceC: "alert('Hello World');",
-	correctAnswer: "C"
+    question: "1. How do you write 'Hello World' in an alert box?",
+    choiceA: "msgBox('Hello World');",
+    choiceB: "alertBox('Hello World');",
+    choiceC: "alert('Hello World');",
+    correctAnswer: "C"
 },
 {
-	question: "2. What will this output? var a = [1, 2, 3]; console.log(a[6]);",
-	choiceA: "undefined",
-	choiceB: "0",
-	choiceC: "prints nothing",
-	correctAnswer: "A"
+    question: "2. What will this output? var a = [1, 2, 3]; console.log(a[6]);",
+    choiceA: "undefined",
+    choiceB: "0",
+    choiceC: "prints nothing",
+    correctAnswer: "A"
 }, {
-	question: "3. What would be the result of 2+4+'6'?",
-	choiceA: "246",
-	choiceB: "12",
-	choiceC: "66",
-	correctAnswer: "C"
+    question: "3. What would be the result of 2+4+'6'?",
+    choiceA: "246",
+    choiceB: "12",
+    choiceC: "66",
+    correctAnswer: "C"
 }, {
-	question: "4. How can a value be appended to an array?",
-	choiceA: "arr(length).value;",
-	choiceB: "arr[arr.length]=value;",
-	choiceC: "arr[]=add(value);",
-	correctAnswer: "B"
+    question: "4. How can a value be appended to an array?",
+    choiceA: "arr(length).value;",
+    choiceB: "arr[arr.length]=value;",
+    choiceC: "arr[]=add(value);",
+    correctAnswer: "B"
 }, {
-	question: "5. What will the code below output to the console? console.log(1 +  +'2' + '2');",
-	choiceA: "'32'",
-	choiceB: "'122'",
-	choiceC: "'13'",
-	correctAnswer: "A"
+    question: "5. What will the code below output to the console? console.log(1 +  +'2' + '2');",
+    choiceA: "'32'",
+    choiceB: "'122'",
+    choiceC: "'13'",
+    correctAnswer: "A"
 }];
 
 const lastQuestion = questions.length - 1;
@@ -55,70 +55,70 @@ let TIMER;
 let score = 0;
 
 // render a question
-function renderQuestion(){
+function renderQuestion() {
     let q = questions[runningQuestion];
-    
-    question.innerHTML = "<p>"+ q.question +"</p>";
+
+    question.innerHTML = "<p>" + q.question + "</p>";
     choiceA.innerHTML = q.choiceA;
     choiceB.innerHTML = q.choiceB;
     choiceC.innerHTML = q.choiceC;
 };
 
-start.addEventListener("click",startQuiz);
+start.addEventListener("click", startQuiz);
 
 // start quiz
-function startQuiz(){
+function startQuiz() {
     start.style.display = "none";
     renderQuestion();
     quiz.style.display = "block";
     renderProgress();
     renderCounter();
-    TIMER = setInterval(renderCounter,1000); // 1000ms = 1s
+    TIMER = setInterval(renderCounter, 1000); // 1000ms = 1s
 };
 
 // render progress
-function renderProgress(){
-    for(let qIndex = 0; qIndex <= lastQuestion; qIndex++){
-        progress.innerHTML += "<div class='prog' id="+ qIndex +"></div>";
+function renderProgress() {
+    for (let qIndex = 0; qIndex <= lastQuestion; qIndex++) {
+        progress.innerHTML += "<div class='prog' id=" + qIndex + "></div>";
     }
 };
 
 // counter render
 
-function renderCounter(){
+function renderCounter() {
     count <= 61
-        counter.innerHTML = count;
-        timeGauge.style.width = count * gaugeUnit + "px";
-        count--
+    counter.innerHTML = count;
+    timeGauge.style.width = count * gaugeUnit + "px";
+    count--
 
-        if(count<= -1){
-            clearInterval(TIMER);
-            scoreRender();
-        }
+    if (count <= -1) {
+        clearInterval(TIMER);
+        scoreRender();
+    }
 };
 
-    
+
 
 
 // checkAnwer
 
-function checkAnswer(answer){
-    if( answer === questions[runningQuestion].correctAnswer){
+function checkAnswer(answer) {
+    if (answer === questions[runningQuestion].correctAnswer) {
         // answer is correct
         score++;
         // change progress color to green
         answerIsCorrect();
-    }else{
+    } else {
         // answer is wrong
         // change progress color to red
         answerIsWrong();
-    
-       
+
+
     }
-    if(runningQuestion < lastQuestion){
+    if (runningQuestion < lastQuestion) {
         runningQuestion++;
         renderQuestion();
-    }else{
+    } else {
         // end the quiz and show the score
         clearInterval(TIMER);
         scoreRender();
@@ -127,51 +127,52 @@ function checkAnswer(answer){
 };
 
 // answer is correct
-function answerIsCorrect(){
+function answerIsCorrect() {
     document.getElementById(runningQuestion).style.backgroundColor = "green";
 }
 
 // answer is Wrong
-function answerIsWrong(){
+function answerIsWrong() {
     document.getElementById(runningQuestion).style.backgroundColor = "red";
     count -= 10;
-   if(count<=0){
-       clearInterval(TIMER);
-       scoreRender();
-   }
-    
+    if (count <= 0) {
+        clearInterval(TIMER);
+        scoreRender();
+    }
+
 };
 
 // score render
-function scoreRender(){
+function scoreRender() {
     scoreDiv.style.display = "block";
-    
+
     // calculate the amount of question percent answered by the user
-     
-    // choose the image based on the scorePerCent
-  
-  
-    document.getElementById("initial").style.display="block";
-    
+
+
+
+    document.getElementById("initial").style.display = "block";
+
 };
 
-document.getElementById("submit").addEventListener("click", function(){
-    const scorePerCent = Math.round(100 * score/questions.length);
-    var playerScore ={
-        initial:document.getElementById("textbox").value,
-        score:scorePerCent
+document.getElementById("submit").addEventListener("click", function () {
+    const scorePerCent = Math.round(100 * score / questions.length);
+    var playerScore = {
+        initial: document.getElementById("textbox").value,
+        score: scorePerCent
     }
     var recScore = localStorage.setItem("scorePerCent", JSON.stringify(playerScore));
-    var getplayerInfo =  JSON.parse( localStorage.getItem("scorePerCent"))
-    scoreDiv.innerHTML += "<p>"+  getplayerInfo.initial+" - " + getplayerInfo.score +"%</p>";
-    document.getElementById("initial").style.display="none";
-    document.getElementById("viewHighscore").style.display="block";
-})
+    var getplayerInfo = JSON.parse(localStorage.getItem("scorePerCent"))
+    scoreDiv.innerHTML += "<p>" + getplayerInfo.initial + " - " + getplayerInfo.score + "%</p>";
+    document.getElementById("initial").style.display = "none";
+    document.getElementById("viewHighscore").style.display = "block";
 
-document.getElementById("goBack").addEventListener("click", function(){
-    location.reload()
-})
-document.getElementById("clear").addEventListener("click", function(){
-    scoreDiv.innerHTML=""
-    localStorage.clear()
-})
+
+    document.getElementById("goBack").addEventListener("click", function () {
+        location.reload();
+    })
+    document.getElementById("clearMe").addEventListener("click", function () {
+        scoreDiv.innerHTML = "",
+        localStorage.clear();
+    });
+    
+});
